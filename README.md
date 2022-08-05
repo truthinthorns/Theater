@@ -1,1 +1,2 @@
 # Theater
+This is a class project where we were instructed to make a website that allowed the user to enter a zip code, then show a list of theaters with that zip code. After, the user picks a theater, and is shown all of the movies and times for the selected theater. After choosing a time for a movie, the user then enters how many tickets they want, and enters a card number (not validated), and the seats are "bought." It was done using JSF, with the IDE being NetBeans. There is a local server that has all of the information about the theaters and movies.
