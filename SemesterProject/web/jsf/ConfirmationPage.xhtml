@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <link rel="stylesheet"
+              href="https://fonts.googleapis.com/css?family=Montserrat"/>
+        <link rel="stylesheet"
+              href="https://fonts.googleapis.com/css?family=Edu+QLD+Beginner"/>
+        <link rel="stylesheet" href="styleSheet.css"/>
+        <title>Thank you!</title>
+    </h:head>
+    <h:body class="body">
+        <f:view>
+            <h:form>
+                <div class="siteBar">
+                    <div class='siteBarLogo'>
+                        <h:graphicImage value="/resources/logo.png" style="border-radius: 50%; height: 200px; width: 200px;"/>
+                        <a href="MainPage.xhtml" style="text-decoration: none; color:black;" class="siteName">Kiwi Beans</a>
+                    </div>
+                    <div class="zipInput">
+                        <h:outputLabel value="Enter Zip Code" class="zipLabel"/>
+                        <div>
+                            <h:inputText id="zipCode" maxlength="5" size="5" value="#{mainPageBean.zipCode}" required="true" requiredMessage="You must                              enter a zip code." validatorMessage="You must enter a 5 digit zip code." class="inputField">
+                                <f:validateRegex pattern="^\d{5}$" for="zipCode" />
+                            </h:inputText>
+                            <h:commandButton value="Search" action="#{mainPageBean.showTheaters(mainPageBean.zipCode)}" class="s_button"/>
+                        </div>
+                        <h:message for="zipCode" style="color: red; font-family: 'Montserrat',serif; font-size: 16px; margin-top: 0;" />
+                    </div>
+                </div>
+            </h:form>
+        </f:view>
+        <div>
+            <h1 class="header">Thank you for your Purchase!</h1>
+            <br/>
+            <h2 class="header" style="text-align: center;">Order Details</h2>
+            <div>
+                <p class="info" style="font-style: italic;">#{mainPageBean.movie.movieName}</p>
+                <p class="info">#{mainPageBean.theater.theaterName}</p>
+                <p class="info">#{mainPageBean.theater.theaterAddress}</p>
+                <p class="info">@#{mainPageBean.time.MT_showtime}</p>
+                <p class="info">#{mainPageBean.ticketCount} Ticket(s)</p>
+                <p class="info">Total: $#{mainPageBean.price}</p>
+            </div>
+        </div>
+    </h:body>
+    <footer class="footer">
+        <h:form>
+            <h:link value="Credits" outcome="#{mainPageBean.showCredits()}" class="link_info" style='margin-left: 0; float: right;'/>
+        </h:form>
+    </footer>
+</html>
+

@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <link rel="stylesheet"
+              href="https://fonts.googleapis.com/css?family=Montserrat"/>
+        <link rel="stylesheet"
+              href="https://fonts.googleapis.com/css?family=Edu+QLD+Beginner"/>
+        <link rel="stylesheet" href="styleSheet.css"/>
+        <title>List of Theaters</title>
+    </h:head>
+    <h:body class="body">
+        <f:view>
+            <h:form>
+                <div class="siteBar">
+                    <div class='siteBarLogo'>
+                        <h:graphicImage value="/resources/logo.png" style="border-radius: 50%; height: 200px; width: 200px;"/>
+                        <a href="MainPage.xhtml" style="text-decoration: none; color:black;" class="siteName">Kiwi Beans</a>
+                    </div>
+                    <div class="zipInput">
+                        <h:outputLabel value="Enter Zip Code" class="zipLabel"/>
+                        <div>
+                            <h:inputText id="zipCode" maxlength="5" size="5" value="#{mainPageBean.zipCode}" required="true" requiredMessage="You must                              enter a zip code." validatorMessage="You must enter a 5 digit zip code." class="inputField">
+                                <f:validateRegex pattern="^\d{5}$" for="zipCode" />
+                            </h:inputText>
+                            <h:commandButton value="Search" action="#{mainPageBean.showTheaters(mainPageBean.zipCode)}" class="s_button"/>
+                        </div>
+                        <h:message for="zipCode" style="color: red; font-family: 'Montserrat',serif; font-size: 16px; margin-top: 0;" />
+                    </div>
+                </div>
+                <h1 class="header">Theaters Near #{mainPageBean.zipCode}</h1>
+                <h:dataTable value="#{mainPageBean.theaterList}" var="theater">
+                    <h:column>
+                        <f:facet name="header">
+                            <h2 class="header">Theater Name</h2>
+                        </f:facet>
+                        <h:commandLink value="#{theater.theaterName}" class="link_info" action="#{mainPageBean.showMovies(theater)}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h2 class="header">Theater Address</h2>
+                        </f:facet>
+                        <h:outputText value="#{theater.theaterAddress}" class="info"/>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </f:view>
+    </h:body>
+    <footer class="footer">
+        <h:form>
+            <h:link value="Credits" outcome="#{mainPageBean.showCredits()}" class="link_info" style='margin-left: 0; float: right;'/>
+        </h:form>
+    </footer>
+</html>
